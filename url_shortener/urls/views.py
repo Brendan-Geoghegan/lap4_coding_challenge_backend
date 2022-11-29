@@ -16,9 +16,15 @@ def list(request):
     urls_json = jsonify(urls)
     return JsonResponse(urls_json)
 
-def show(request, id):
+# def show(request, id):
+#     if request.method == 'GET':
+#         url = get_object_or_404(Urls, pk=id)
+#         url_json = jsonify(url)
+#         return JsonResponse(url_json)
+
+def show(request, path):
     if request.method == 'GET':
-        url = get_object_or_404(Urls, pk=id)
+        url = get_object_or_404(Urls, short_url=f"http://localhost:3000/{path}")
         url_json = jsonify(url)
         return JsonResponse(url_json)
     
@@ -28,7 +34,7 @@ def create(request):
     if request.method == 'POST':
         long_url = json.loads(request.body)
         short_url_path = ''.join(random.choices(string.ascii_uppercase + string.digits, k=4))
-        new_url = Urls.objects.create(long_url=long_url["long_url"], short_url=f"http://127.0.0.1:8000/urls/{short_url_path}")
+        new_url = Urls.objects.create(long_url=long_url["long_url"], short_url=f"http://localhost:3000/{short_url_path}")
         new_url_json = jsonify(new_url)
         return JsonResponse(new_url_json)
 

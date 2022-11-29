@@ -5,5 +5,5 @@ urlpatterns = [
     path("", views.home, name="urls-home"),
     path("list/", views.list, name="urls-list"),
     path("create/", views.create, name="urls-add"),
-    path("<int:id>", views.show, name="urls-show"),
+    path("<str:path>", views.show, name="urls-show"),
 ]
