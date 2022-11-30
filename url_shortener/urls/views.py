@@ -47,3 +47,11 @@ def jsonify(self):
     lst = json.loads( jsn )
     object_dct = lst[0]
     return object_dct
+
+
+def not_found_404(request, exception):
+    data = { 'err' : exception }
+    return JsonResponse({"message": "not_found", "status": "false"}, status=404)
+
+def server_error_500(request):
+    return render(request, '500.html')
